@@ -15,24 +15,30 @@
 
 int main(void) {
 	DDRA = 0x00; PORTA = 0xFF;
-	DDRB = 0xFF; PORTB = 0x00; 
-	unsigned char tmpB = 0x00; 
-	unsigned char tmpA = 0x00; 
+	DDRC = 0xFF; PORTC = 0x00; 
+	unsigned char tmpC = 0x00; 
+	unsigned char tmpA = 0x00;
+	unsigned char cnt; 
 while(1) {
-		
-		tmpA = PINA & 0x03;
-		
-		if (tmpA == 0x01) {
-			tmpB = (tmpB & 0xFC) | 0x01; 
-							 
-		}
-		 else {
-			tmpB = (tmpB & 0xFC) | 0x00; 
-							 
-		}	
+	tmpA = 0x00;
+	cnt = 4;
+	tmpA = PINA & 0x0F;
 
-		PORTB = tmpB;	
+	if ((tmpA & 0x01) == 0x01){
+		--cnt;
+	}	
+	if ((tmpA & 0x02) == 0x02){
+		--cnt;
 	}
+	if ((tmpA & 0x04) == 0x04){
+		--cnt;
+	}
+	if ((tmpA & 0x08) == 0x08){
+		--cnt;
+	}
+
+	PORTC = cnt;	
+}
 	return 0;
 }
 
