@@ -15,34 +15,38 @@
 
 int main(void) {
 	DDRA = 0x00; PORTA = 0xFF;
-	DDRC = 0xFF; PORTC = 0x00; 
-	unsigned char tmpC = 0x00; 
-	unsigned char tmpA = 0x00;
+	DDRB = 0x00; PORTB = 0xFF;
+	DDRC = 0x00; PORTC = 0xFF;
+	DDRD = 0xFF; PORTD = 0x00; 
+	unsigned char tempC = 0x00; 
+	unsigned char tempA = 0x00;
+	unsigned char tempB = 0x00;
+	unsigned char tempD = 0x00;
 	unsigned char cnt; 
 while(1) {
-	tmpA = 0x00;
-	cnt = 4;
-	tmpA = PINA & 0x0F;
+	tempA = 0x00;
+	tempB = 0x00;
+	tempC = 0x00;
+	tempA = PINA & 0xFF;
+	tempB = PINB & 0xFF;
+	tempC = PINC & 0xFF;
 
-	if ((tmpA & 0x01) == 0x01){
-		--cnt;
-	}	
-	if ((tmpA & 0x02) == 0x02){
-		--cnt;
-	}
-	if ((tmpA & 0x04) == 0x04){
-		--cnt;
-	}
-	if ((tmpA & 0x08) == 0x08){
-		--cnt;
-	}
-	if ((tmpA & 0x0F) == 0x0F){
-		cnt = 0;
-		PORTC = 0x80;
+	if ((tempA + tempB + tempC) > 140){
+		PORTD = PORTD | 0x01;
 	}
 	else{
-		PORTC = cnt;
-	}	
+		PORTD = PORTD | 0x00;
+	}
+	if ((tempA - tempC) > 80 || (tempC - tempA) > 80){
+		PORTD = PORTD | 0x02;
+	}
+	else{
+		PORTD = PORTD | 0x00;
+	}
+
+	tempD = (tempA + tempB + tempC) >> 2;
+	PORTD = (PORTD & 0x03) | tempD;
+	
 }
 	return 0;
 }
