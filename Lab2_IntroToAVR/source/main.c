@@ -36,8 +36,13 @@ while(1) {
 	if ((tmpA & 0x08) == 0x08){
 		--cnt;
 	}
-
-	PORTC = cnt;	
+	if ((tmpA & 0x0F) == 0x0F){
+		cnt = 0;
+		PORTC = 0x80;
+	}
+	else{
+		PORTC = cnt;
+	}	
 }
 	return 0;
 }
