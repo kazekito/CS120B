@@ -17,7 +17,7 @@ while(1) {
 	if ((tempA & 0x02)){ cnt += 2;}
 	if ((tempA & 0x04)){ cnt += 4;}
 	if ((tempA & 0x08)){ cnt += 8;}
-
+	if (cnt == 0){ PORTC = PORTC | 0x40; }
 	if (cnt >= 1 && cnt <= 2) { PORTC = PORTC | 0x60; }
 	if (cnt == 3 || cnt == 4) { PORTC = PORTC | 0x70; }
 	if (cnt == 5 || cnt == 6) { PORTC = PORTC | 0x38; }
