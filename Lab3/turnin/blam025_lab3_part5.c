@@ -11,6 +11,7 @@ int main(void) {
 	unsigned char tempB = 0x00;
 	unsigned short cnt = 0x00;
 while(1) {
+	cnt = 0x00;
 
 	PORTB = 0x00;
 	tempD = PIND & 0xFF;	
