@@ -9,7 +9,6 @@
  */
 #include <avr/io.h>
 #ifdef _SIMULATE_
-#include "RIMS.h"
 #include "simAVRHeader.h"
 #endif
 volatile unsigned char TimerFlag = 0;
